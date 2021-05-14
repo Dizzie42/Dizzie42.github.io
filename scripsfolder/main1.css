@@ -4,7 +4,7 @@ body {
     font-family: Verdana;
     color: rgb(255, 255, 255);
     overflow-x: scroll;
-    overflow-y: hidden;
+    overflow-y: scroll;
 }
 
 #top {
@@ -405,7 +405,7 @@ th {
 }
 
 footer {
-    margin-top: 10px;
+	position: sticky;
     color: rgb(104, 105, 27);
     text-align: center;
     margin-right: 4%;
@@ -512,4 +512,16 @@ footer {
     color: white;
     font-size: 16px;
     padding: 1px;
+}
+
+[contenteditable="true"] {
+	white-space: nowrap;
+	overflow: hidden;
+}
+[contenteditable="true"] br {
+    display:none;
+}
+[contenteditable="true"] * {
+    display:inline;
+    white-space:nowrap;
 }

@@ -205,6 +205,7 @@ window.onload = function() {
         document.getElementById("btnrole").innerText = "Role View"
     }
     GetURLData()
+	
 }
 
 function mouseClick(event) { // click load
@@ -353,6 +354,7 @@ function mouseClickThis(event) {
     ClearData()
     SetDisplay()
 }
+
 
 function SetDisplay() {
     mainString = ""
