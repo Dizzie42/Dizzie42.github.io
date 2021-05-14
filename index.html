@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Burning Crusade - Raid Composition Utility">
+    <meta name="keywords" content="The Burning Crusade, Burning Crusade, TBC, Raid Composition, Raid Comp">
+    <meta name="author" content="Dalya-Atiesh">
+    <meta property="og:image" content="favicon.gif" />
+    <title>TBC Raid Comp</title>
+    <link rel="icon" type="image/png" href="favicon.gif">
+</head>
+
+<body>
+    <link rel="stylesheet" href="scripsfolder/main1.css">
+    <script src="scripsfolder/main1.js" async></script>
+    <script src="scripsfolder/wz_tooltip.js"></script>
+    <script src="scripsfolder/html2canvas.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	
+
+    <div id="top">
+
+        <div id="logo" draggable="false">
+
+            <a href="./"> <img draggable="false" src="imgfolder/TBCLogo.png" alt="logo" width="248" height="30"></a>
+        </div>
+
+        <div id="nav">
+
+            <div id="btnrole" class="button" onclick="btnRole(event)">Role View</div>
+            <div id="btncl" class="button" onclick="btnCopyLink()">Copy Link</div>
+            <div id="btnsi" class="button" onclick="btnSaveImage()">Save Image</div>
+            <div id="btnca" class="button" onclick="btnClearall(event)">Clear all</div>
+
+        </div>
+        <div class="dropdown-container" onmouseleave="mouseLeaveTemplate()">
+
+            <div class="drop-main-btn" onmouseenter="mouseEnterTemplate()">Template</div>
+
+            <div id="dropdownitems" class="dropdown-items">
+
+                <div class="drop-btn" id="dropbtn01" onclick="btnTemplate(event)">Raid Wide Buffs (minimal)</div>
+                <div class="drop-btn" id="dropbtn02" onclick="btnTemplate(event)">Raid wide Buffs + Debuffs (minimal)</div>
+                <div class="drop-btn" id="dropbtn03" onclick="btnTemplate(event)">Party Only Buffs + Raid + Debuffs (example)</div>
+                <div class="drop-btn" id="dropbtn04" onclick="btnTemplate(event)">Example 1: Balanced Melee, Caster/Range Setup</div>
+                <div class="drop-btn" id="dropbtn05" onclick="btnTemplate(event)">Example 2: Range / Caster Focused Setup</div>
+            </div>
+        </div>
+        <div id="faq" onclick="btnFaq()">Faq</div>
+
+    </div>
+
+    <div class="main">
+
+        <div id="container">
+
+            <div id="left">
+
+                <div id="tbclogo">
+                    <img src="imgfolder/TBC.png" alt="TBC Raid Comp" draggable="false" width="332" height="150" />
+                </div>
+
+                <table id="spectable" style="border-collapse: collapse">
+
+                    <tr>
+                        <td id="P1" style="background-color: #21201E"></td>
+                        <td id="P2" style="background-color: #21201E"></td>
+                        <td id="P3" style="background-color: #21201E"></td>
+                    </tr>
+
+                    <tr>
+                        <td id="Grid01" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(255, 124, 10)">Balance</td>
+                        <td id="Grid02" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(255, 124, 10)">Feral</td>
+                        <td id="Grid03" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(255, 124, 10)">Restoration</td>
+                    </tr>
+
+                    <tr>
+                        <td id="Grid04" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(170, 211, 114)">Beast Mastery</td>
+                        <td id="Grid05" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(170, 211, 114)">Marksmanship</td>
+                        <td id="Grid06" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(170, 211, 114)">Survival</td>
+                    </tr>
+
+                    <tr>
+                        <td id="Grid07" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(63, 199, 235)">Arcane</td>
+                        <td id="Grid08" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(63, 199, 235)">Fire</td>
+                        <td id="Grid09" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(63, 199, 235)">Frost </td>
+                    </tr>
+
+                    <tr>
+                        <td id="Grid10" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(244, 140, 186)">Holy</td>
+                        <td id="Grid11" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(244, 140, 186)">Protection</td>
+                        <td id="Grid12" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(244, 140, 186)">Retribution</td>
+                    </tr>
+
+                    <tr>
+                        <td id="Grid13" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color:rgb(255, 255, 255)">Discipline</td>
+                        <td id="Grid14" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color:rgb(255, 255, 255)">Holy</td>
+                        <td id="Grid15" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color:rgb(255, 255, 255)">Shadow</td>
+                    </tr>
+
+                    <tr>
+                        <td id="Grid16" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(255, 244, 104)">Assassination</td>
+                        <td id="Grid17" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(255, 244, 104)">Combat</td>
+                        <td id="Grid18" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(255, 244, 104)">Subtlety</td>
+
+                    </tr>
+
+                    <tr>
+                        <td id="Grid19" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color:rgb(0, 112, 221)">Elemental</td>
+                        <td id="Grid20" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(0, 112, 221)">Enhancement</td>
+                        <td id="Grid21" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(0, 112, 221)">Restoration</td>
+                    </tr>
+
+                    <tr>
+                        <td id="Grid22" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(148, 130, 201)">Affliction</td>
+                        <td id="Grid23" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(148, 130, 201)">Demonology </td>
+                        <td id="Grid24" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(148, 130, 201)">Destruction</td>
+                    </tr>
+
+                    <tr>
+                        <td id="Grid25" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(198, 155, 109)">Arms</td>
+                        <td id="Grid26" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(198, 155, 109)">Fury</td>
+                        <td id="Grid27" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(198, 155, 109)">Protection</td>
+                    </tr>
+
+                    <tr>
+                        <td id="Grid28" style="background-color: #21201E"></td>
+                        <td id="Grid29" style="background-color: #21201E"></td>
+                        <td id="Grid30" style="background-color: #21201E"></td>
+                    </tr>
+
+                    <tr>
+                        <td id="Grid31" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(255, 124, 10)">Druid</td>
+                        <td id="Grid32" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(170, 211, 114)">Hunter</td>
+                        <td id="Grid33" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(63, 199, 235)">Mage</td>
+                    </tr>
+
+                    <tr>
+                        <td id="Grid34" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(244, 140, 186)">Paladin</td>
+                        <td id="Grid35" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(255, 255, 255)">Priest</td>
+                        <td id="Grid36" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(255, 244, 104)">Rogue</td>
+                    </tr>
+
+                    <tr>
+                        <td id="Grid37" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(0, 112, 221)">Shaman</td>
+                        <td id="Grid38" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(148, 130, 201)">Warlock</td>
+                        <td id="Grid39" class="classspec" draggable="true" onclick="mouseClick(event)" ondrop="dropevent(event)" ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(198, 155, 109)">Warrior</td>
+                    </tr>
+
+                </table>
+
+            </div>
+            <div id="center">
+
+                <div id="capture" style="background-color: #000000">
+
+                    <div id="MidLeft">
+
+                        <div class="group" id="g1">Group 1</div>
+                        <div class="party" id="01" draggable="true" onclick="mouseClickMe(event)" onmouseenter="mouseEnter(event)" onmouseleave="mouseLeave(event)" ondragover="allowDrop(event)" ondragenter="enterAreaDrag(event)" ondragleave="leaveAreaDrag(event)" ondrop="dropevent(event)"
+                            ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(0, 0, 0)">&nbsp;</div>
+                        <div class="party" id="02" draggable="true" onclick="mouseClickMe(event)" onmouseenter="mouseEnter(event)" onmouseleave="mouseLeave(event)" ondragover="allowDrop(event)" ondragenter="enterAreaDrag(event)" ondragleave="leaveAreaDrag(event)" ondrop="dropevent(event)"
+                            ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(0, 0, 0)">&nbsp;</div>
+                        <div class="party" id="03" draggable="true" onclick="mouseClickMe(event)" onmouseenter="mouseEnter(event)" onmouseleave="mouseLeave(event)" ondragover="allowDrop(event)" ondragenter="enterAreaDrag(event)" ondragleave="leaveAreaDrag(event)" ondrop="dropevent(event)"
+                            ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(0, 0, 0)">&nbsp;</div>
+                        <div class="party" id="04" draggable="true" onclick="mouseClickMe(event)" onmouseenter="mouseEnter(event)" onmouseleave="mouseLeave(event)" ondragover="allowDrop(event)" ondragenter="enterAreaDrag(event)" ondragleave="leaveAreaDrag(event)" ondrop="dropevent(event)"
+                            ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(0, 0, 0)">&nbsp;</div>
+                        <div class="party" id="05" draggable="true" onclick="mouseClickMe(event)" onmouseenter="mouseEnter(event)" onmouseleave="mouseLeave(event)" ondragover="allowDrop(event)" ondragenter="enterAreaDrag(event)" ondragleave="leaveAreaDrag(event)" ondrop="dropevent(event)"
+                            ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(0, 0, 0)">&nbsp;</div>
+                        <div class="empty" id="e1"></div>
+
+                        <div class="group" id="g3">Group 3</div>
+                        <div class="party" id="11" draggable="true" onclick="mouseClickMe(event)" onmouseenter="mouseEnter(event)" onmouseleave="mouseLeave(event)" ondragover="allowDrop(event)" ondragenter="enterAreaDrag(event)" ondragleave="leaveAreaDrag(event)" ondrop="dropevent(event)"
+                            ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(0, 0, 0)">&nbsp;</div>
+                        <div class="party" id="12" draggable="true" onclick="mouseClickMe(event)" onmouseenter="mouseEnter(event)" onmouseleave="mouseLeave(event)" ondragover="allowDrop(event)" ondragenter="enterAreaDrag(event)" ondragleave="leaveAreaDrag(event)" ondrop="dropevent(event)"
+                            ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(0, 0, 0)">&nbsp;</div>
+                        <div class="party" id="13" draggable="true" onclick="mouseClickMe(event)" onmouseenter="mouseEnter(event)" onmouseleave="mouseLeave(event)" ondragover="allowDrop(event)" ondragenter="enterAreaDrag(event)" ondragleave="leaveAreaDrag(event)" ondrop="dropevent(event)"
+                            ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(0, 0, 0)">&nbsp;</div>
+                        <div class="party" id="14" draggable="true" onclick="mouseClickMe(event)" onmouseenter="mouseEnter(event)" onmouseleave="mouseLeave(event)" ondragover="allowDrop(event)" ondragenter="enterAreaDrag(event)" ondragleave="leaveAreaDrag(event)" ondrop="dropevent(event)"
+                            ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(0, 0, 0)">&nbsp;</div>
+                        <div class="party" id="15" draggable="true" onclick="mouseClickMe(event)" onmouseenter="mouseEnter(event)" onmouseleave="mouseLeave(event)" ondragover="allowDrop(event)" ondragenter="enterAreaDrag(event)" ondragleave="leaveAreaDrag(event)" ondrop="dropevent(event)"
+                            ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(0, 0, 0)">&nbsp;</div>
+                        <div class="empty" id="e2"></div>
+
+                        <div class="group" id="g5">Group 5</div>
+                        <div class="party" id="21" draggable="true" onclick="mouseClickMe(event)" onmouseenter="mouseEnter(event)" onmouseleave="mouseLeave(event)" ondragover="allowDrop(event)" ondragenter="enterAreaDrag(event)" ondragleave="leaveAreaDrag(event)" ondrop="dropevent(event)"
+                            ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(0, 0, 0)">&nbsp;</div>
+                        <div class="party" id="22" draggable="true" onclick="mouseClickMe(event)" onmouseenter="mouseEnter(event)" onmouseleave="mouseLeave(event)" ondragover="allowDrop(event)" ondragenter="enterAreaDrag(event)" ondragleave="leaveAreaDrag(event)" ondrop="dropevent(event)"
+                            ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(0, 0, 0)">&nbsp;</div>
+                        <div class="party" id="23" draggable="true" onclick="mouseClickMe(event)" onmouseenter="mouseEnter(event)" onmouseleave="mouseLeave(event)" ondragover="allowDrop(event)" ondragenter="enterAreaDrag(event)" ondragleave="leaveAreaDrag(event)" ondrop="dropevent(event)"
+                            ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(0, 0, 0)">&nbsp;</div>
+                        <div class="party" id="24" draggable="true" onclick="mouseClickMe(event)" onmouseenter="mouseEnter(event)" onmouseleave="mouseLeave(event)" ondragover="allowDrop(event)" ondragenter="enterAreaDrag(event)" ondragleave="leaveAreaDrag(event)" ondrop="dropevent(event)"
+                            ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(0, 0, 0)">&nbsp;</div>
+                        <div class="party" id="25" draggable="true" onclick="mouseClickMe(event)" onmouseenter="mouseEnter(event)" onmouseleave="mouseLeave(event)" ondragover="allowDrop(event)" ondragenter="enterAreaDrag(event)" ondragleave="leaveAreaDrag(event)" ondrop="dropevent(event)"
+                            ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(0, 0, 0)">&nbsp;</div>
+
+                    </div>
+
+                    <div id="MidRight">
+                        <div class="group" id="g2">Group 2</div>
+                        <div class="party" id="06" draggable="true" onclick="mouseClickMe(event)" onmouseenter="mouseEnter(event)" onmouseleave="mouseLeave(event)" ondragover="allowDrop(event)" ondragenter="enterAreaDrag(event)" ondragleave="leaveAreaDrag(event)" ondrop="dropevent(event)"
+                            ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(0, 0, 0)">&nbsp;</div>
+                        <div class="party" id="07" draggable="true" onclick="mouseClickMe(event)" onmouseenter="mouseEnter(event)" onmouseleave="mouseLeave(event)" ondragover="allowDrop(event)" ondragenter="enterAreaDrag(event)" ondragleave="leaveAreaDrag(event)" ondrop="dropevent(event)"
+                            ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(0, 0, 0)">&nbsp;</div>
+                        <div class="party" id="08" draggable="true" onclick="mouseClickMe(event)" onmouseenter="mouseEnter(event)" onmouseleave="mouseLeave(event)" ondragover="allowDrop(event)" ondragenter="enterAreaDrag(event)" ondragleave="leaveAreaDrag(event)" ondrop="dropevent(event)"
+                            ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(0, 0, 0)">&nbsp;</div>
+                        <div class="party" id="09" draggable="true" onclick="mouseClickMe(event)" onmouseenter="mouseEnter(event)" onmouseleave="mouseLeave(event)" ondragover="allowDrop(event)" ondragenter="enterAreaDrag(event)" ondragleave="leaveAreaDrag(event)" ondrop="dropevent(event)"
+                            ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(0, 0, 0)">&nbsp;</div>
+                        <div class="party" id="10" draggable="true" onclick="mouseClickMe(event)" onmouseenter="mouseEnter(event)" onmouseleave="mouseLeave(event)" ondragover="allowDrop(event)" ondragenter="enterAreaDrag(event)" ondragleave="leaveAreaDrag(event)" ondrop="dropevent(event)"
+                            ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(0, 0, 0)">&nbsp;</div>
+                        <div class="empty" id="e4"></div>
+
+                        <div class="group" id="g4">Group 4</div>
+                        <div class="party" id="16" draggable="true" onclick="mouseClickMe(event)" onmouseenter="mouseEnter(event)" onmouseleave="mouseLeave(event)" ondragover="allowDrop(event)" ondragenter="enterAreaDrag(event)" ondragleave="leaveAreaDrag(event)" ondrop="dropevent(event)"
+                            ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(0, 0, 0)">&nbsp;</div>
+                        <div class="party" id="17" draggable="true" onclick="mouseClickMe(event)" onmouseenter="mouseEnter(event)" onmouseleave="mouseLeave(event)" ondragover="allowDrop(event)" ondragenter="enterAreaDrag(event)" ondragleave="leaveAreaDrag(event)" ondrop="dropevent(event)"
+                            ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(0, 0, 0)">&nbsp;</div>
+                        <div class="party" id="18" draggable="true" onclick="mouseClickMe(event)" onmouseenter="mouseEnter(event)" onmouseleave="mouseLeave(event)" ondragover="allowDrop(event)" ondragenter="enterAreaDrag(event)" ondragleave="leaveAreaDrag(event)" ondrop="dropevent(event)"
+                            ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(0, 0, 0)">&nbsp;</div>
+                        <div class="party" id="19" draggable="true" onclick="mouseClickMe(event)" onmouseenter="mouseEnter(event)" onmouseleave="mouseLeave(event)" ondragover="allowDrop(event)" ondragenter="enterAreaDrag(event)" ondragleave="leaveAreaDrag(event)" ondrop="dropevent(event)"
+                            ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(0, 0, 0)">&nbsp;</div>
+                        <div class="party" id="20" draggable="true" onclick="mouseClickMe(event)" onmouseenter="mouseEnter(event)" onmouseleave="mouseLeave(event)" ondragover="allowDrop(event)" ondragenter="enterAreaDrag(event)" ondragleave="leaveAreaDrag(event)" ondrop="dropevent(event)"
+                            ondragstart="startdragevent(event)" ondragend="enddropevent(event)" style="background-color: rgb(0, 0, 0)">&nbsp;</div>
+                        <div id="setimg"></div>
+                        <div id="getdown"></div>
+
+                        <div class="inforaid">
+
+                            <div class="infoarea"><span id="atank">0</span>&nbsp;&nbsp;Tank</div>
+                            <div class="infoarea"><span id="aheal">0</span>&nbsp;&nbsp;Heal</div>
+                            <div class="infoarea"><span id="amelee">0</span>&nbsp;&nbsp;Melee</div>
+                            <div class="infoarea"><span id="arange">0</span>&nbsp;&nbsp;Range</div>
+                            <div class="infoarea"><span id="aplayers">0</span>&nbsp;&nbsp;Players</div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div id="right">
+                <div id="partybuffs">
+
+                    <div class="bigwords">Party <i>Only </i> Buffs</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/MeleeCritParty.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aMeleeCrit" class="infotext">0</span>&emsp;Melee Crit</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/SpellCritPartyDruid.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aSpellCrit" class="infotext">0</span>&emsp;Spell Crit</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/spellhitParty.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aSpellHit" class="infotext">0</span>&emsp;Spell Crit / Spell Hit</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/healthParty.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aHealth" class="infotext">0</span>&emsp;Health</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/StaminaParty.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aStaminaP" class="infotext">0</span>&emsp;Stamina</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/StaminaPartyDemonology.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aStaminaPartyDemonology" class="infotext">0</span>&emsp;Stamina (Demonology)</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/strengthParty.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aStrength" class="infotext">0</span>&emsp;Strength</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/AgiltyParty.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aAgility" class="infotext">0</span>&emsp;Agility</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/AttackPowerPartyWarrior.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aAttackPowerPWarrior" class="infotext">0</span>&emsp;Attack Power (Warrior)</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/AttackPowerPartyShaman.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aAttackPowerPShaman" class="infotext">0</span>&emsp;Attack Power (Enhancement)</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/AttackPowerPartyHunter.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aAttackPowerPHunter" class="infotext">0</span>&emsp;Attack Power (Marksmanship)</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/hero.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aAttackCastingSpeed" class="infotext">0</span>&emsp;Attack / Casting Speed</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/ExtraAttackParty.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aExtraMeleeAttack" class="infotext">0</span>&emsp;Extra Melee Attack</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/DamageParty.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aDamage" class="infotext">0</span>&emsp;Damage (Beast Mastery)</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/DamagePartyRet.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aDamageRet" class="infotext">0</span>&emsp;Damage (Retribution)</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/SpellDamageParty.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aSpellDamage" class="infotext">0</span>&emsp;Spell Damage</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/HealingReceivedParty.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aHealingReceived" class="infotext">0</span>&emsp;Healing Received</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/ManaRestorationPartyShaman.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aManaRestorationShaman" class="infotext">0</span>&emsp;Mana Restoration</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/ManaRestorationPartyResto.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aManaRestorationResto" class="infotext">0</span>&emsp;Mana Restoration (Restoration)</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/ManaReplenishmentParty.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aManaReplenishment" class="infotext">0</span>&emsp;Mana Replenishment</div>
+                    <div class="bigwords" id="raidwidebuffs">Raid Wide uffs</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/StatsStaticRaid.jpg\' width=\'400\'>')" onmouseout="UnTip()"><span id="aStatsStatic" class="infotext">0</span>&emsp;Stats Static&emsp;</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/StaminaRaid.jpg\' width=\'400\'>')" onmouseout="UnTip()"><span id="aStaminaR" class="infotext">0</span>&emsp;Stamina&emsp;</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/SpiritRaid.jpg\' width=\'400\'>')" onmouseout="UnTip()"><span id="aSpirit" class="infotext">0</span>&emsp;Spirit / Spell Damage&emsp;</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/IntellectRaid.jpg\' width=\'400\'>')" onmouseout="UnTip()"><span id="aIntellect" class="infotext">0</span>&emsp;Intellect&emsp;</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/StatsPRaid.jpg\' width=\'400\'>')" onmouseout="UnTip()"><span id="aStatsP" class="infotext">0</span>&emsp;Stats %&emsp;</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/apRaid.jpg\' width=\'400\'>')" onmouseout="UnTip()"><span id="aAttackPowerR" class="infotext">0</span>&emsp;Attack Power&emsp;</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/ReducedThreatRaid.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aReducedThreat" class="infotext">0</span>&emsp;Reduced Threat&emsp;</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/ManaRestorationParty.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aManaRestoration" class="infotext">0</span>&emsp;Mana Restoration&emsp;</div>
+
+                </div>
+                <div id="raidbuffs">
+
+                    <div class="bigwords">Offensive Debuffs</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/PlayerAPDebuff.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aPlayerAttackPower" class="infotext">0</span>&emsp;Player Attack Power (Survival)&emsp;</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/PlayerAPDebuffMarks.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aPlayerAttackPowerMarks" class="infotext">0</span>&emsp;Player Attack Power (Marks)&emsp;</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/PhysicalDamageDebuff.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aPhysicalDamageTaken" class="infotext">0</span>&emsp;Physical Damage Taken&emsp;</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/SpellDamageDebuff.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aSpellDamageTaken" class="infotext">0</span>&emsp;Spell Damage Taken (Warlock)&emsp;</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/IncreasedSpellDamageTakenDebuff.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aIncreasedSpellDamageTaken" class="infotext">0</span>&emsp;Spell Damage Taken (Affliction)&emsp;</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/impshadowbolt.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aShadowDamageTakenWarlock" class="infotext">0</span>&emsp;Shadow Damage Taken (Warlock)&emsp;</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/ShadowSpellDamageDebuff.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aShadowDamageTaken" class="infotext">0</span>&emsp;Shadow Damage Taken (Shadow)&emsp;</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/FireDamageDebuff.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aFireDamageTaken" class="infotext">0</span>&emsp;Fire Damage Taken&emsp;</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/PlayerCritDebuff.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aCrit" class="infotext">0</span>&emsp;Player Crit&emsp;</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/PlayerFrostCrit.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aPlayerFrostCrit" class="infotext">0</span>&emsp;Player Frost Crit&emsp;</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/playerHitDebuff.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aPhysicalHit" class="infotext">0</span>&emsp;Player Physical Hit&emsp;</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/BleedDamage.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aBleedDamage" class="infotext">0</span>&emsp;Bleed Damage&emsp;</div>
+                    <div class="bigwords">Reduction Debuffs</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/reducedAP.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aReducedAttackPower" class="infotext">0</span>&emsp;Reduced Attack Power&emsp;</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/reducedattackspeed.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aReducedAttackSpeed" class="infotext">0</span>&emsp;Reduced Attack Speed&emsp;</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/ArmorReducedWarrior.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aReducedArmorWarrior" class="infotext">0</span>&emsp;Reduced Armor (Warrior)&emsp;</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/ArmorReducedWarlock.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aReducedArmorWarlock" class="infotext">0</span>&emsp;Reduced Armor (Warlock)&emsp;</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/ArmorReducedDruid.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aReducedArmorDruid" class="infotext">0</span>&emsp;Reduced Armor (Druid)&emsp;</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/ArmorReducedRogue.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aReducedArmorRogue" class="infotext">0</span>&emsp;Reduced Armor (Rogue)&emsp;</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/ArmorReducedRogueAssassination.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aReducedArmorAssassination" class="infotext">0</span>&emsp;Reduced Armor (Assassination)&emsp;</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/ReducedPhysicalHit.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aReducedPhysicalHit" class="infotext">0</span>&emsp;Reduced Physical Hit&emsp;</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/ReducedHitBalance.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aReducedHitBalance" class="infotext">0</span>&emsp;Reduced Hit&emsp;</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/ReducedPhysicalDamage.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aReducedPhysicalDamage" class="infotext">0</span>&emsp;Reduced Physical Damage&emsp;</div>
+                    <div class="bigwords">Utility Debuffs</div>
+                    <div class="bufftext" onmouseover="Tip('<img src=\'imgfolder/judgementdebuff.jpg\'width=\'400\'>')" onmouseout="UnTip()"><span id="aJudgement" class="infotext">0</span>&emsp;Judgement&emsp;</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <footer>made by Dalya-Atiesh</footer>
+
+    <div id="contextMenu" class="context-menu" style="display: none">
+        <ul>
+            <li><span id="m1" onclick="mouseClickThis(event)">Remove</span></li>
+
+        </ul>
+    </div>
+
+    <div id="modal-bg">
+
+        <div>
+
+            <div id="pushdown"></div>
+            <div class="big">WTF is this site?</div>
+
+            <div class="text">The purpose of <span style="color:limegreen">TBC Raid Comp</span> is to help visualize the composition of a Burning Crusade 25 person raid, where party only Buff synergy is extremely important!</div>
+            <br>
+            <div class="big">Cool Story Bro... How do i use this?</div>
+
+            <div class="text">simply drag the <span style="color: rgb(244, 140, 186)">spec</span> or <span style="color:rgb(255, 244, 104)">class</span> to the raid position. <br> alternatively you can click on a spec or class and the first empty space available will be
+                filled. (dragging constantly does get a little tedious) <br> then you can share a link or an image of the "Perfect" TBC raid comp.
+            </div>
+            <br>
+            <div class="big">Buff/Debuff information</div>
+            <div class="text"> Mouse over the specific buff or debuff for a detailed description of the ability.</div>
+            <br>
+            <div class="big">Missing Buffs/Debuffs?</div>
+            <div class="text"> The scope of this site is primarily focused on offensive / damage increasing Buffs, Debuffs and some Utility. <br> More straightforward Buffs such as auras / totems that increase "Resistances" and "Armor" are not included.</div>
+            <br>
+            <div class="big">You guys all have phones right?</div>
+            <div class="text">Currently this site is Not optimized to run correctly on Phones.</div>
+            <br>
+            <div class="big">Raid Layout?</div>
+            <div class="text">The way i've always visualized raid groups is as follows: <br><br> Group 1: Tank &nbsp; &nbsp; Group 2: Heal&nbsp; <br> Group 3: Melee &nbsp; Group 4: Hunter(Flex) &nbsp;<br> Group 5: Caster
+                <br><br>Others might do this completely differently and that's cool! -this is the arrangement i use in templates.</div>
+
+            <span id="modal-close" class="buttonClose" onclick="mouseClickCloseModal() ">close</span>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
